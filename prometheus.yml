@@ -20,14 +20,14 @@ rule_files:
 # Here it's Prometheus itself.
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: "prometheus"
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
-    static_configs:
-      - targets: ["localhost:9090"]
-  - job_name: "ultrafeeder"
+  # Removing prometheus job as it is likely not required for Ultrafeeder
+  #- job_name: "prometheus"
+  #  static_configs:
+  #    - targets: ["localhost:9090"]
+  ## if self scraping is needed in future, add as a 3rd target in the job below
+  ## changing the job_name from "ultrafeeder" to GS_ID instead
+  ## this is to eliminate the out of order error.
+  - job_name: "<GS_ID>"
     static_configs:
       - targets: ["localhost:9273", "localhost:9274"]
 
